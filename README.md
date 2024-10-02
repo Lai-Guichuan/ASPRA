@@ -15,6 +15,7 @@ counts <- counts[matched_gene_lengths$gene, ]
 gene_lengths_vector <- matched_gene_lengths$length
 RPK <- counts / (gene_lengths_vector / 1000)
 TPM <- sweep(RPK, 2, colSums(RPK), FUN = "/") * 1e6
+TPM <- log2(TPM+1)
 
 library(ASPRA)
 filtered_gene_sets <- readRDS("filtered_gene_sets.rds")
